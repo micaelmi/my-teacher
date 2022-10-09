@@ -1,6 +1,8 @@
 import { Button } from "@mui/material";
+import { Teacher } from "../../@types/teacher";
 import {
   Description,
+  Empty,
   Informations,
   ItemListStyled,
   ListStyled,
@@ -9,46 +11,40 @@ import {
   Value,
 } from "./list.style";
 
-const TeacherList = () => {
+interface TeacherListProps {
+  teachers: Teacher[];
+}
+
+const TeacherList = (props: TeacherListProps) => {
   return (
-    <ListStyled>
-      <ItemListStyled>
-        <Photo src="https://github.com/micaelmi.png" />
-        <Informations>
-          <Name>Micael Miranda</Name>
-          <Value>R$ 50,00 por hora</Value>
-          <Description>Aulas de Front-end</Description>
-          <Button sx={{ width: "70%" }}>Marcar Aula com Micael</Button>
-        </Informations>
-      </ItemListStyled>
-      <ItemListStyled>
-        <Photo src="https://github.com/micaelmi.png" />
-        <Informations>
-          <Name>Micael Miranda</Name>
-          <Value>R$ 50,00 por hora</Value>
-          <Description>Aulas de Front-end</Description>
-          <Button sx={{ width: "70%" }}>Marcar Aula com Micael</Button>
-        </Informations>
-      </ItemListStyled>
-      <ItemListStyled>
-        <Photo src="https://github.com/micaelmi.png" />
-        <Informations>
-          <Name>Micael Miranda</Name>
-          <Value>R$ 50,00 por hora</Value>
-          <Description>Aulas de Front-end</Description>
-          <Button sx={{ width: "70%" }}>Marcar Aula com Micael</Button>
-        </Informations>
-      </ItemListStyled>
-      <ItemListStyled>
-        <Photo src="https://github.com/micaelmi.png" />
-        <Informations>
-          <Name>Micael Miranda</Name>
-          <Value>R$ 50,00 por hora</Value>
-          <Description>Aulas de Front-end</Description>
-          <Button sx={{ width: "70%" }}>Marcar Aula com Micael</Button>
-        </Informations>
-      </ItemListStyled>
-    </ListStyled>
+    <div>
+      {props.teachers.length > 0 ? (
+        <ListStyled>
+          {props.teachers.map((teacher) => (
+            <ItemListStyled key={teacher.id}>
+              <Photo src={teacher.photo} />
+              <Informations>
+                <Name>{teacher.name}</Name>
+                <Value>
+                  {teacher.value.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                    style: "currency",
+                    currency: "BRL",
+                  })}{" "}
+                  por hora
+                </Value>
+                <Description>{teacher.description}</Description>
+                <Button sx={{ width: "100%" }}>
+                  Marcar Aula com {teacher.name}
+                </Button>
+              </Informations>
+            </ItemListStyled>
+          ))}
+        </ListStyled>
+      ) : (
+        <Empty>Nenhum professor encontrado</Empty>
+      )}
+    </div>
   );
 };
 

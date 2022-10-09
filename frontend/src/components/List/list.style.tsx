@@ -25,10 +25,17 @@ export const ListStyled = styled("ul")`
 
 export const ItemListStyled = styled("li")`
   list-style: none;
+  border: 1px solid ${(props) => props.theme.palette.primary.main};
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: #dbdbdb;
 `;
 
 export const Photo = styled("img")`
   width: 100%;
+  border-radius: 50%;
+  border: 1px solid ${(props) => props.theme.palette.text.secondary};
+  background-color: ${(props) => props.theme.palette.secondary.main};
 `;
 
 export const Informations = styled("div")``;
@@ -45,4 +52,10 @@ export const Value = styled("p")`
 
 export const Description = styled("p")`
   word-break: break-word;
+`;
+
+export const Empty = styled("h2")`
+  font-size: 3rem;
+  width: 100%;
+  text-align: center;
 `;
