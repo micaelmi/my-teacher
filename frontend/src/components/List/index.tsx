@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
-import { Teacher } from "../../@types/teacher";
+import { TeacherBR } from "../../@types/teacher";
+import { FormatadorService } from "../../services/FormatadorService";
 import {
   Description,
   Empty,
@@ -12,7 +13,8 @@ import {
 } from "./list.style";
 
 interface TeacherListProps {
-  teachers: Teacher[];
+  teachers: TeacherBR[];
+  onSelect: (teacher: TeacherBR) => void;
 }
 
 const TeacherList = (props: TeacherListProps) => {
@@ -22,20 +24,21 @@ const TeacherList = (props: TeacherListProps) => {
         <ListStyled>
           {props.teachers.map((teacher) => (
             <ItemListStyled key={teacher.id}>
-              <Photo src={teacher.photo} />
+              <Photo src={teacher.foto} />
               <Informations>
-                <Name>{teacher.name}</Name>
+                <Name>{teacher.nome}</Name>
                 <Value>
-                  {teacher.value.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                    style: "currency",
-                    currency: "BRL",
-                  })}{" "}
-                  por hora
+                  {FormatadorService.valorMonetario(teacher.valor_hora)} por
+                  hora
                 </Value>
-                <Description>{teacher.description}</Description>
-                <Button sx={{ width: "100%" }}>
-                  Marcar Aula com {teacher.name}
+                <Description>
+                  {FormatadorService.limitarTexto(teacher.descricao, 100)}
+                </Description>
+                <Button
+                  sx={{ width: "100%", borderRadius: "4px" }}
+                  onClick={() => props.onSelect(teacher)}
+                >
+                  Marcar Aula com {teacher.nome}
                 </Button>
               </Informations>
             </ItemListStyled>

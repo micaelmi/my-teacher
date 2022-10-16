@@ -5,3 +5,11 @@ export interface Teacher {
   value: number;
   photo: string;
 }
+
+export interface TeacherBR {
+  id: number;
+  nome: string;
+  descricao: string;
+  valor_hora: number;
+  foto: string;
+}
