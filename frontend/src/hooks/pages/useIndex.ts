@@ -11,6 +11,12 @@ export function useIndex() {
   const [professorSelecionado, setProfessorSelecionado] =
     useState<TeacherBR | null>(null);
 
+  const [cadastrar, setCadastrar] = useState(false);
+  const [professorNome, setProfessorNome] = useState("");
+  const [valorHora, setValorHora] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [foto, setFoto] = useState("");
+
   useEffect(() => {
     ApiService.get("/professores").then((response) => {
       setListTeachers(response.data);
@@ -46,6 +52,37 @@ export function useIndex() {
     return nome.length >= 3 && email.length >= 6;
   }
 
+  function cadastrarProfessor() {
+    if (cadastrar === true) {
+      if (validarDadosProfessor()) {
+        // ApiService.post(`/professores/${professorSelecionado.id}/aulas`, {
+        //   nome,
+        //   email,
+        // })
+        //   .then(() => {
+        //     setProfessorSelecionado(null);
+        //     setMensagem("Aula marcada com sucesso!");
+        //   })
+        //   .catch((error) => {
+        //     setMensagem(error.response?.data.message);
+        //   });
+        setCadastrar(false);
+        setMensagem("Cadastro realizado com sucesso!");
+      } else {
+        setMensagem("Preencha os dados corretamente");
+      }
+    }
+  }
+
+  function validarDadosProfessor() {
+    return (
+      professorNome.length >= 3 &&
+      valorHora.length > 0 &&
+      descricao.length > 10 &&
+      foto.length > 12
+    );
+  }
+
   return {
     listTeachers,
     nome,
@@ -57,5 +94,16 @@ export function useIndex() {
     marcarAula,
     mensagem,
     setMensagem,
+    cadastrar,
+    setCadastrar,
+    professorNome,
+    setProfessorNome,
+    valorHora,
+    setValorHora,
+    descricao,
+    setDescricao,
+    foto,
+    setFoto,
+    cadastrarProfessor,
   };
 }

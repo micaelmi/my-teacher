@@ -15,12 +15,25 @@ a {
   box-sizing: border-box;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-} */
+footer {
+  background-color: #f52273;
+  padding: 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+}
+
+footer button {
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  border: none;
+  color: #f52273;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+footer button:hover {
+  background-color: #fab9fa;
+}

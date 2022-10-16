@@ -23,6 +23,17 @@ const Home: NextPage = () => {
     marcarAula,
     mensagem,
     setMensagem,
+    cadastrar,
+    setCadastrar,
+    professorNome,
+    setProfessorNome,
+    valorHora,
+    setValorHora,
+    descricao,
+    setDescricao,
+    foto,
+    setFoto,
+    cadastrarProfessor,
   } = useIndex();
 
   return (
@@ -87,6 +98,70 @@ const Home: NextPage = () => {
         autoHideDuration={2500}
         onClose={() => setMensagem("")}
       />
+
+      <footer>
+        <button className="cadastrar" onClick={() => setCadastrar(true)}>
+          Cadastre-se como Professor
+        </button>
+      </footer>
+
+      <Dialog
+        open={cadastrar === true}
+        onClose={() => setCadastrar(false)}
+        fullWidth
+        PaperProps={{ sx: { p: 5 } }}
+      >
+        <Grid container spacing={1}>
+          <Grid item xs={12} sx={{ textAlign: "center" }}>
+            <h2>Insira seus dados para se cadastrar</h2>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Nome"
+              type="text"
+              fullWidth
+              value={professorNome}
+              onChange={(e) => setProfessorNome(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Valor da hora"
+              type="number"
+              fullWidth
+              value={valorHora}
+              onChange={(e) => setValorHora(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Descrição da aula"
+              type="text"
+              fullWidth
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Link da sua foto"
+              type="text"
+              fullWidth
+              value={foto}
+              onChange={(e) => setFoto(e.target.value)}
+            />
+          </Grid>
+        </Grid>
+
+        <DialogActions sx={{ mt: 1 }}>
+          <Button sx={{ width: "100px" }} onClick={() => setCadastrar(false)}>
+            Cancelar
+          </Button>
+          <Button sx={{ width: "100px" }} onClick={() => cadastrarProfessor()}>
+            Cadastrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
