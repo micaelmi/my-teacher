@@ -6,6 +6,7 @@ export function useIndex() {
   const [listTeachers, setListTeachers] = useState<TeacherBR[]>([]);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [mensagem, setMensagem] = useState("");
 
   const [professorSelecionado, setProfessorSelecionado] =
     useState<TeacherBR | null>(null);
@@ -16,6 +17,11 @@ export function useIndex() {
     });
   }, []);
 
+  useEffect(() => {
+    setNome("");
+    setEmail("");
+  }, [professorSelecionado]);
+
   function marcarAula() {
     if (professorSelecionado != null) {
       if (validarDadosAula()) {
@@ -25,13 +31,13 @@ export function useIndex() {
         })
           .then(() => {
             setProfessorSelecionado(null);
-            alert("Aula marcada com sucesso!");
+            setMensagem("Aula marcada com sucesso!");
           })
           .catch((error) => {
-            alert(error.response?.data.message);
+            setMensagem(error.response?.data.message);
           });
       } else {
-        alert("Preencha os dados corretamente");
+        setMensagem("Preencha os dados corretamente");
       }
     }
   }
@@ -49,5 +55,7 @@ export function useIndex() {
     professorSelecionado,
     setProfessorSelecionado,
     marcarAula,
+    mensagem,
+    setMensagem,
   };
 }

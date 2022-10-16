@@ -35,10 +35,10 @@ const TeacherList = (props: TeacherListProps) => {
                   {FormatadorService.limitarTexto(teacher.descricao, 100)}
                 </Description>
                 <Button
-                  sx={{ width: "100%", borderRadius: "4px" }}
+                  sx={{ width: "100%", borderRadius: "4px", fontSize: "14px" }}
                   onClick={() => props.onSelect(teacher)}
                 >
-                  Marcar Aula com {teacher.nome}
+                  Marcar Aula com {teacher.nome.split(" ")[0]}
                 </Button>
               </Informations>
             </ItemListStyled>
